@@ -1,11 +1,11 @@
 """
 An example settings module
 """
-
 from __future__ import absolute_import, unicode_literals
 
 from os.path import abspath, dirname, join
 
+import os
 
 def root(*args):
     """
@@ -78,7 +78,8 @@ LOCALE_PATHS = [
 
 ROOT_URLCONF = 'customerdataapi.urls'
 
-SECRET_KEY = 'insecure-secret-key'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # Internationalization
