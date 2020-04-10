@@ -14,10 +14,13 @@ def root(*args):
     return join(abspath(dirname(__file__)), *args)
 
 
-# Development flags
+# Development flags [Prod -> False , Dev -> True]
 
-DEBUG = True
+DEBUG = False
 
+# Hosts Allow [Change * for domain or ip server]
+
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
