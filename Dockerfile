@@ -11,7 +11,8 @@ COPY . /code/
 
 RUN make bootstrap
 
-RUN python manage.py migrate
+#RUN python manage.py migrate
+CMD [ "make", "run" ]
 
 EXPOSE 8010
 

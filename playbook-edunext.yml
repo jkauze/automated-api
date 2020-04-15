@@ -4,30 +4,30 @@
   gather_facts: no
   become: true
   tasks:
-    - name: Install base packages for docker
-      apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools', 'sqlite3']
+    # - name: Install base packages for docker
+    #   apt: name={{ item }} state=latest update_cache=yes
+    #   loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools', 'sqlite3']
 
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+    # - name: Add Docker GPG apt Key
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
 
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu xenial stable
-        state: present
+    # - name: Add Docker Repository
+    #   apt_repository:
+    #     repo: deb https://download.docker.com/linux/ubuntu xenial stable
+    #     state: present
 
-    - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
+    # - name: Update apt and install docker-ce
+    #   apt: update_cache=yes name=docker-ce state=latest
 
-    - name: Install Docker Module for Python
-      pip:
-        name: docker
+    # - name: Install Docker Module for Python
+    #   pip:
+    #     name: docker
 
-    - name: Install pip docker-compose
-      pip:
-        name: docker-compose
+    # - name: Install pip docker-compose
+    #   pip:
+    #     name: docker-compose
 
     - name: Cloning project from github
       git:
