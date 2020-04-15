@@ -29,6 +29,10 @@
       pip:
         name: django
 
+    - name: Install django framework
+      pip:
+        name: djangorestframework
+
     - name: Install pip docker-compose
       pip:
         name: docker-compose
@@ -52,6 +56,7 @@
         state: present
       register: output
 
-    - name: Migrate DB
-      django_manage:
-        command: migrate
+    # - name: Migrate DB
+    #   django_manage:
+    #     command: migrate
+    #     app_path: "edunext"
