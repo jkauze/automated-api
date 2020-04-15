@@ -23,6 +23,9 @@
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
 
+    - name: Add Env Key
+      shell: echo "export SECRET_KEY='insecure-secret-key'" >> /root/.bashrc
+
     - name: Install Docker Module for Python
       pip:
         name: docker
@@ -31,7 +34,12 @@
       pip:
         name: docker-compose
 
-    - name: Create and start services
+    - name: Tear down existing services docker
+      docker_service:
+        project_src: automated-api
+        state: absent
+
+    - name: Create and start services docker
       docker_service:
         project_src: automated-api
       register: output

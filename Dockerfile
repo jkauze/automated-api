@@ -5,8 +5,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
 
-RUN echo "export SECRET_KEY='insecure-secret-key'" >> /root/.bashrc
-
 WORKDIR /code/
 
 COPY ./requirements /code/requirements
