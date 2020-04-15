@@ -1,4 +1,4 @@
-# Version stable python 3.7.7
+# Small Python Image
 FROM python:3.7.7-slim
 
 ENV PYTHONUNBUFFERED 1
@@ -10,6 +10,8 @@ WORKDIR /code/
 COPY . /code/
 
 RUN make bootstrap
+
+RUN python manage.py migrate
 
 EXPOSE 8010
 
