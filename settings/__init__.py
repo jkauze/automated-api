@@ -1,11 +1,11 @@
 """
 An example settings module
 """
-
 from __future__ import absolute_import, unicode_literals
 
 from os.path import abspath, dirname, join
 
+import os
 
 def root(*args):
     """
@@ -14,10 +14,13 @@ def root(*args):
     return join(abspath(dirname(__file__)), *args)
 
 
-# Development flags
+# Development flags [Prod -> False , Dev -> True]
 
-DEBUG = True
+DEBUG = False
 
+# Hosts Allow [Change * for domain or ip server]
+
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -75,7 +78,8 @@ LOCALE_PATHS = [
 
 ROOT_URLCONF = 'customerdataapi.urls'
 
-SECRET_KEY = 'insecure-secret-key'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # Internationalization

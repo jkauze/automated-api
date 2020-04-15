@@ -1,50 +1,37 @@
 ---
-- hosts: localhost
+- hosts: all
+  name: Deploy del api con Docker
   gather_facts: no
+  become: true
+  vars:
+    # default_container_name: pruebaEDU
   tasks:
-    - name: Tear down existing services
-      docker_compose:
-        project_src: .
-        state: absent
+    # - name: instalando paquetes base
+    #   apt: name={{ item }} state=latest update_cache=yes
+    #   loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools']
+
+    # - name: Add Docker GPG apt Key
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
+
+    # - name: Add Docker Repository
+    #   apt_repository:
+    #     repo: deb https://download.docker.com/linux/ubuntu xenial stable
+    #     state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Install pip docker-compose
+      pip:
+        name: docker-compose
 
     - name: Create and start services
-      docker_compose:
-        project_src: .
+      docker_service:
+        project_src: /home/jk/Documents/001_challenge_stack
       register: output
-
-    - debug:
-        var: output
-
-    - name: Run `docker-compose up` again
-      docker_compose:
-        project_src: .
-        build: no
-      register: output
-
-    - debug:
-        var: output
-
-    - assert:
-        that: "not output.changed "
-
-    # - name: Stop all services
-    #   docker_compose:
-    #     project_src: .
-    #     build: no
-    #     stopped: yes
-    #   register: output
-
-    # - debug:
-    #     var: output
-
-    # - assert:
-    #     that:
-    #       - "not web.flask_web_1.state.running"
-    #       - "not db.flask_db_1.state.running"
-
-    # - name: Restart services
-    #   docker_compose:
-    #     project_src: flask
-    #     build: no
-    #     restarted: yes
-    #   register: output

@@ -1,0 +1,10 @@
+version: '2.0'
+
+services:
+    api:
+        build: .
+        command: bash
+        volumes:
+            - .:/code
+        ports:
+            - "8010:8010"
