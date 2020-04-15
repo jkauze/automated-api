@@ -4,7 +4,7 @@ services:
     api:
         build: .
         container_name: edunext
-        command: bash -c "python manage.py loaddata customerdataapi/initial_data.json ; make run"
+        command: make run
         volumes:
             - .:/code
         ports:
