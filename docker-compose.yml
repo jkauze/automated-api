@@ -3,7 +3,8 @@ version: '3.0'
 services:
     api:
         build: .
-        command: make run
+        container_name: edunext
+        command: bash -c "python manage.py loaddata customerdataapi/initial_data.json && make run"
         volumes:
             - .:/code
         ports:

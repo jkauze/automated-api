@@ -8,7 +8,7 @@
   tasks:
     - name: instalando paquetes base
       apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools']
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools', 'sqlite3']
 
     - name: Add Docker GPG apt Key
       apt_key:

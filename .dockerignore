@@ -3,3 +3,4 @@ README.md
 AUTHORS
 .dockerignore
 .gitignore
+playbook-edunext.yml
