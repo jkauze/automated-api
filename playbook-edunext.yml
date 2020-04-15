@@ -33,5 +33,5 @@
 
     - name: Create and start services
       docker_service:
-        project_src: /home/jk/Documents/001_challenge_stack
+        project_src: automated-api
       register: output
