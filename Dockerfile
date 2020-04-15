@@ -7,13 +7,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
 WORKDIR /code/
 
-COPY ./requirements /code/requirements
-
-COPY Makefile /code/
+COPY . /code/
 
 RUN make bootstrap
-
-COPY . /code/
 
 EXPOSE 8010
 
