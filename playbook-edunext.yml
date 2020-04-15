@@ -1,12 +1,10 @@
 ---
 - hosts: all
-  name: Deploy del api con Docker
+  name: Deploying API to remote with docker
   gather_facts: no
   become: true
-  vars:
-    # default_container_name: pruebaEDU
   tasks:
-    - name: instalando paquetes base
+    - name: Install base packages for docker
       apt: name={{ item }} state=latest update_cache=yes
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools', 'python-setuptools', 'sqlite3']
 
@@ -31,14 +29,21 @@
       pip:
         name: docker-compose
 
+    - name: Cloning project from github
+      git:
+        repo: 'https://github.com/jkauze/automated-api.git'
+        dest: /root/edunext
+        clone: yes
+        update: yes
+
     - name: Tear down existing services docker
       docker_service:
-        project_src: automated-api
+        project_src: edunext
         state: absent
 
     - name: Create and start services docker
       docker_service:
         project_name: eduNEXT
-        project_src: automated-api
+        project_src: edunext
         state: present
       register: output
