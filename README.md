@@ -1,47 +1,75 @@
-Challenge stack
-===============
+# Deploy application with Ansible and Docker [Dev]
 
-This application is a sample REST API provided for the eduNEXT developer challenge.
+Challenge for eduNEXT - Devops
 
-The application you develop should interact with this app as it would do with other applications on our production environment. There is no need to modify the code running here.
+## Getting Started
 
+This is an application whose purpose is to be deployable on any computer with a docker, the deployment can be done on multiple computers as long as they are defined in the inventory. remote deployment is done with Ansible
 
-Rationale
-=========
+### Prerequisites
 
-This part of the challenge tests your ability to initialize a similar stack to the ones we use during everyday development. Also in the real world you are not always in control of the complete infrastructure and stack. You need to make your own solutions work as pieces of the puzzle.
+Remote access is required through ssh, for this it is necessary for the client to put his public key on the target computers / servers (root). Requirements:
 
+Client:
+python
+ansible
+ssh-client
 
-Getting started
-===============
+Servers:
+python
+ssh-server
 
-To get you started on the challenge quickly, we have created some bootstrapping scripts to make things easier.
-
-In plain language all you need to do is create a virtualenv[^1] and run the bootstrap target with make.
-
-A detailed step by step description is:
-
+Finally the client must modify its nodes in 
 ```
-cd 001_challenge_stack
-virtualenv venv
-source venv/bin/activate
-make bootstrap
-make run
+/etc/ansible/hosts
 ```
 
-The development server should have started now. You can visit the API by navigating in a browser to : `http://localhost:8010/api/v1/customerdata/`.
+### Installing
 
-Imagine that what you just launched is the service where we keep information of all our customers. Each customer gets an unique ID. For example `1b2f7b83-7b4d-441d-a210-afaa970e5b76`, then you can interact with the data for any specific customer using the URL `http://localhost:8010/api/v1/customerdata/1b2f7b83-7b4d-441d-a210-afaa970e5b76`. You can find the IDs for all the customers and the object for each customer by looking at the development server in a browser.
+with your nodes defined and with playbook-edunext.yml downloaded, run
 
-Now leave this running and move to the step 002 of the challenge. If you mess up your work later, you can come back and use `make erase` to clear everything again. Then start over at the step 2 of the list.
+```
+# ansible-playbook playbook-edunext.yml
+```
+
+add flag "-u root" if you are not root.
+
+Wait for all tasks to finish. already finished you can access the server through its ip on port 8010 and verify that the api is running (check the firewall of the server)
+
+If you want to work on the api, you can access the server and make the necessary changes on the project by leaving it located in **root/edunext**. all changes will be applied to docker contain.
 
 
----
+## Api for devs
 
-[^1]:
-Virtualenv is a python utility to make development simple.
+Clone this repository. make sure u have docker and docker-compose installed and run:
 
-A guide on how to install virtualenv for Linux, Mac and Windows is available here (no need to do the django part):
-http://pythoncentral.io/how-to-install-python-django-windows-mac-linux/
+**To start:**
+```
+git clone https://github.com/jkauze/automated-api
+cd automated-api
+docker-compose up -d
+```
 
-Disclaimer: this instructions were tested using a linux OS, if you have problems running this in a different OS, please let us know.
+And start code.
+
+**To stop:**
+
+```
+docker-compose stop
+```
+**To delete:**
+```
+docker-compose down --rmi all
+```
+
+## Authors
+
+* **Jesus Kauze** - *Owner*
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+
+## Acknowledgments
+
+* eduNEXT team for the opportunity to learn more about SRE and Devops
+* Inspiration - M.a.c
