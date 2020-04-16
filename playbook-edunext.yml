@@ -55,3 +55,6 @@
         project_src: edunext
         state: present
       register: output
+
+    - name: Migrate db and load initial data
+      shell: cd edunext && docker-compose exec api python manage.py migrate && docker-compose exec api python manage.py loaddata customerdataapi/initial_data.json
